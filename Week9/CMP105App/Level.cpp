@@ -6,7 +6,6 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	input = in;
 
 	// initialise game objects
-
 }
 
 Level::~Level()
@@ -17,20 +16,29 @@ Level::~Level()
 // handle user input
 void Level::handleInput(float dt)
 {
+	if (input->isKeyDown(sf::Keyboard::Escape))
+	{
+		window->close();
+	}
 
+	if (input->isKeyDown(sf::Keyboard::Space))
+	{
+		input->setKeyUp(sf::Keyboard::Space);
+		beachBallManager.spawn();
+	}
 }
 
 // Update game objects
 void Level::update(float dt)
 {
-	
+	beachBallManager.update(dt);
 }
 
 // Render level
 void Level::render()
 {
 	beginDraw();
-
+	beachBallManager.render(window);
 	endDraw();
 }
 
